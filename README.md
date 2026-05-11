@@ -76,3 +76,79 @@
 ├── set.ini # 语言资源文件（编译时嵌入资源）
 ├── Module1.bas # 可选的公共模块
 └── Project1.vbp # 工程文件
+# VS Code Lite
+**VS Code Lite** is a lightweight multi-tab text editor developed with Visual Basic 6.0. It delivers a concise, efficient, and feature-rich plain text editing environment. Drawing design inspiration from modern code editors, it supports multi-file management, syntax-level line highlighting, regular expression find-and-replace, Unicode large file reading, and Material 3 themed color extraction. It is ideal for daily text processing, code viewing, and lightweight editing scenarios.
+
+## Core Features
+
+### File Management
+- **Multi-tab Browsing**: Open multiple files simultaneously in the left file list and switch instantly with one click.
+- **New / Open / Save / Save As**: Full support for Unicode file paths; automatic encoding recognition for UTF-8 / ANSI, with one-click saving as UTF-8 BOM format.
+- **Drag-and-Drop Opening**: Directly drag files into the editor window to open them.
+- **Command Line Launch**: Accept file paths via command line parameters; supports system file association for double-click direct opening.
+- **Save Prompt on Close**: Pop up a confirmation dialog when closing unsaved files.
+
+### Editing Functions
+- **Undo / Redo**: Unlimited undo and redo history; automatic history recording (up to 50 steps) for files under 5MB.
+- **Find / Replace**:
+  - Standard text search with case sensitivity and whole-word matching options.
+  - Regular expression mode supporting global match and replace.
+  - Find Next (F3), Replace All, and confirm one-by-one replacement.
+- **Clipboard Operations**: Copy, cut and paste interact with the system clipboard in pure Unicode format.
+- **Common Keyboard Shortcuts**: Ctrl+A Select All, Ctrl+C Copy, Ctrl+X Cut, Ctrl+V Paste, Ctrl+Z Undo, Ctrl+Y Redo, Ctrl+S Save.
+
+### Interface & Display
+- **Line Number Margin**: Dynamic line number display on the left side of the editor, auto-synced with scroll; width adapts automatically to the maximum line number.
+- **Line Highlighting**: Mark single or multiple lines via right-click menu or hotkeys; highlight colors auto-adjust based on background tone to ensure readability.
+- **Borderless Design**: Unified background color for editor area and line number margin; font size and margin spacing fully customizable.
+- **File List Panel**: Right-side panel displays all opened files with modification asterisk (*) indicator; right-click menu supports move up, move down and close tab operations.
+- **Window Size Protection**: Restricts minimum window dimensions to prevent layout distortion of controls.
+
+### Formatting & Statistics
+- **Smart Formatting**: One-click removal of trailing spaces, merging redundant blank lines and optimizing text layout.
+- **Word & Line Statistics**: Displays physical line count, rendered line count, total character count (including spaces), net character count (excluding spaces and line breaks), and total word count.
+
+### Theme & Appearance
+- **Material 3 Auto Color Extraction**: Extract high-saturation primary colors from any image (e.g., wallpaper), automatically generate two theme layers: Surface (editor background) and Primary (line number margin background); text color auto-selects high-contrast white or dark gray.
+- **Custom Background Color**: Manually set editor background via color picker dialog.
+- **Font Configuration**: Freely customize font family, size, style (bold, italic, underline, strikethrough) and text color; line number margin font syncs automatically.
+
+### Internationalization
+- **Multi-Language UI**: Built-in support for 8 languages: Simplified Chinese, Traditional Chinese, English, French, German, Italian, Spanish, Japanese.
+- One-click language switching for all menu titles and prompt messages; language packs loaded via embedded resources.
+
+### Performance & Compatibility
+- **Chunked Large File Loading**: Uses `ReadFile` API to load files in 512KB blocks; real-time progress display with support for task cancellation, keeping memory usage stable.
+- **Full Unicode Path Support**: File open/save and system dialogs adopt Unicode APIs (`CreateFileW`, `GetOpenFileNameW`, etc.) to correctly handle filenames in any language.
+- **GDI+ Image Processing**: GDI+ is used for image loading and pixel sampling in theme color extraction.
+- **Memory Optimization**: Actively calls `SetProcessWorkingSetSize` to reclaim physical memory after loading large documents or creating new files.
+
+## System Requirements
+- **Operating System**: Windows 2000 and above (Recommended: Windows XP / 7 / 10 / 11)
+- **Runtime Dependencies**: Visual Basic 6.0 Runtime Library (pre-installed on most systems), CommonDialog Control (Comdlg32.ocx), RichTextBox Control (Richtx32.ocx), and GDI+ Runtime (built-in since Windows XP).
+- **Compilation Environment**: Visual Basic 6.0 IDE or compatible compiler; requires project references to Microsoft Common Dialog Control and Microsoft Rich Textbox Control.
+
+## Build & Run
+1. Open the project file (.vbp) with VB6 IDE.
+2. Verify all controls (`CommonDialog1`, `Text1` (RichTextBox), `picLineBar` (PictureBox), `List1` (ListBox), `picSampler` (PictureBox), etc.) are properly added to the form.
+3. Add a custom resource entry with type `"CUSTOM"` and ID `"LANGINI"` for multi-language INI resource files via the resource editor, or embed language pack files directly into the executable.
+4. Compile to generate standalone EXE for direct execution.
+
+## User Guide
+- **First Launch**: The program automatically creates a blank document ready for direct input or paste.
+- **Open Files**: Use `File -> Open` or drag files into the window; supports common text formats including `.txt`, `.ini`, `.log`, `.html`, `.json`, `.md`, `.xml`.
+- **Switch Language**: Select preferred language from the `Language` menu.
+- **Theme Color Extraction**: Go to `Tools -> Theme Color Extraction`, select an image, and the program will auto-adjust background tones for editor and line number margin.
+- **Find & Replace**: Open the search panel via `Edit -> Find/Replace`; supports regular expressions and whole-word matching. Press F3 to find next match.
+- **Line Highlighting**: Right-click target lines or use `Tools -> Highlight Line` to mark lines; repeat operation to cancel highlighting.
+- **Font Adjustment**: Customize font style and color via `Tools -> Font Settings`.
+- **Print**: Output current text content to printer via `File -> Print`.
+
+## Project Structure
+```
+├── Form1.frm               # Main form (core business logic)
+├── frmFindReplace.frm      # Find and replace popup form
+├── set.ini                 # Language resource file (embedded during compilation)
+├── Module1.bas             # Optional public module
+└── Project1.vbp            # VB6 project file
+```
